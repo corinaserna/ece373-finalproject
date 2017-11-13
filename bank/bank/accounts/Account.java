@@ -16,6 +16,8 @@ public abstract class Account {
 		this.belongsTo = belongsTo;
 		this.loginUsername = username;
 		this.loginPassword = password;
+		this.belongsTo.setLoginUsername(username);
+		this.belongsTo.setLoginPassword(password);
 		this.savingsAcct = new Savings();
 		this.checkingAcct = new Checking();
 	}
