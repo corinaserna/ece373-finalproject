@@ -49,6 +49,16 @@ public abstract class Account {
 	public double getMaxTransferAmount() {
 		return maxTransferAmount;
 	}
+	public double getTransferAmount(double a) {
+		if(this.totalAmount - a >= 25) {
+			this.totalAmount = this.totalAmount - a;
+			return a;
+		}
+		else {
+			//not enough money;
+			return 0;
+		}
+	}
 	/**
 	 * @param maxTransferAmount the maxTransferAmount to set
 	 */
@@ -108,4 +118,5 @@ public abstract class Account {
 	public abstract void depositCheckings(double amount);
 	public abstract double withdrawCheckings(double amount);
 	public abstract void payCreditBill(double amount);
+	public abstract void addDeposit(double amount);
 }

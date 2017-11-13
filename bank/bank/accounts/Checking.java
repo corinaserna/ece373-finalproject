@@ -1,12 +1,18 @@
 package bank.accounts;
 
+import bank.people.Person;
+
 public class Checking {
 	private int accountID;
 	private double requiredMinAmount;
 	private double amount;
+
 	
 	public Checking(){
-		
+		this.accountID = 0;
+		//minimum amount is 25$
+		this.requiredMinAmount = 0;
+		this.amount = 0;
 	}
 	
 	/**
@@ -45,6 +51,14 @@ public class Checking {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	
+	/**
+	 * @param amount deposit to account
+	 */
+	public void addDeposit(double a) {
+		this.amount = amount + a;
+	}
+	/**
+	 * @param Taking amount out from account
+	 */
 	
 }

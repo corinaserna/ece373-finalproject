@@ -6,7 +6,10 @@ public class Savings {
 	private double amount;
 	
 	public Savings(){
-		
+		accountID = 0;
+		//Require at least 25$ to keep the account open
+		requiredMinAmount = 0;
+		amount = 0;
 	}
 	
 	/**
@@ -44,6 +47,12 @@ public class Savings {
 	 */
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	/**
+	 * @param add deposit to total
+	 */
+	public void addDeposit(double a) {
+		this.amount = this.amount + a;
 	}
 	
 }

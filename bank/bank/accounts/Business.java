@@ -2,7 +2,7 @@ package bank.accounts;
 
 import bank.people.Person;
 
-public class Business extends Account{
+public abstract class Business extends Account{
 	
 
 	public Business(Person belongsTo, String loginUsername, String loginPassword) {
@@ -13,8 +13,7 @@ public class Business extends Account{
 
 	@Override
 	public void depositSavings(double amount) {
-		// TODO Auto-generated method stub
-		
+		super.getSavingsAcct().addDeposit(amount);
 	}
 
 	@Override
@@ -25,19 +24,24 @@ public class Business extends Account{
 
 	@Override
 	public void depositCheckings(double amount) {
-		// TODO Auto-generated method stub
+		this.getCheckingAcct().addDeposit(amount);
 		
 	}
 
 	@Override
 	public double withdrawCheckings(double amount) {
-		// TODO Auto-generated method stub
+		if(super.getTransferAmount(amount) == 0) {
+			System.out.println("Account will have less than 25$ ");
+		}
+		
 		return 0;
 	}
 
 	@Override
 	public void payCreditBill(double amount) {
-		// TODO Auto-generated method stub
+		//Does moeny get subtracted from total, or other accounts?
+		//
+		//
 		
 	}
 }

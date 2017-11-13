@@ -2,7 +2,7 @@ package bank.accounts;
 
 import bank.people.Person;
 
-public class Personal extends Account{
+public abstract class Personal extends Account{
 	private CreditCard creditcard;
 	
 	public Personal(Person belongsTo, String username, String password) {
@@ -26,32 +26,36 @@ public class Personal extends Account{
 
 	@Override
 	public void depositSavings(double amount) {
-		// TODO Auto-generated method stub
-		
+		super.getSavingsAcct().addDeposit(amount);
 	}
 
 	@Override
 	public double withdrawSavings(double amount) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(super.getTotalAmount()-amount >= 25) {
+			super.getTransferAmount(amount);
+			return amount;
+		}
+		else {
+			System.out.println("Account will have less than 25$ after withdrawal. ");
+			return 0;
+		}
 	}
 
 	@Override
 	public void depositCheckings(double amount) {
-		// TODO Auto-generated method stub
+		super.getCheckingAcct().addDeposit(amount);
 		
 	}
 
 	@Override
 	public double withdrawCheckings(double amount) {
-		// TODO Auto-generated method stub
+		//TODO getting money from checking amount or amount from saving
 		return 0;
 	}
 
 	@Override
 	public void payCreditBill(double amount) {
-		// TODO Auto-generated method stub
-		
+		getCreditcard().payCard(amount);
 	}
 	
 	

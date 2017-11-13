@@ -6,7 +6,9 @@ public class CreditCard {
 	private double creditBill;
 	
 	public CreditCard(){
-		
+		this.cardNumber = 0;
+		this.creditLimit = 0;
+		this.creditBill = 0;
 	}
 	
 	/**
@@ -44,6 +46,12 @@ public class CreditCard {
 	 */
 	public void setCreditBill(double creditBill) {
 		this.creditBill = creditBill;
+	}
+	/**
+	 * @param creditBill the creditBill to set
+	 */
+	public void payCard(double amount) {
+		this.creditBill = this.creditBill - amount;
 	}
 	
 	
