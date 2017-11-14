@@ -1,26 +1,42 @@
 package bank.accounts;
 
+import java.util.Random;
+
 public class CreditCard {
-	private int cardNumber;
+	private String cardNumber;
 	private double creditLimit;
 	private double creditBill;
 	
 	public CreditCard(){
+<<<<<<< HEAD
 		this.cardNumber = 0;
 		this.creditLimit = 0;
 		this.creditBill = 0;
+=======
+		this.creditBill = 0.0;
+		this.creditLimit = 500.00;
+		StringBuilder builder = new StringBuilder();
+		Random rand = new Random();
+		
+		for(int i = 0; i < 16; i++) {
+			int digit = rand.nextInt(10);
+			builder.append(digit);
+		}
+		
+		this.cardNumber = builder.toString();
+>>>>>>> branch 'master' of https://github.com/corinaserna/ece373-finalproject.git
 	}
 	
 	/**
 	 * @return the cardNumber
 	 */
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 	/**
 	 * @param cardNumber the cardNumber to set
 	 */
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 	/**
