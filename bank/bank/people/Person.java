@@ -4,11 +4,13 @@ public class Person {
 	private String name;
 	private String loginUsername;
 	private String loginPassword;
+	private double moneyOnHand;
 	
 	public Person(){
 		this.name = null;
 		this.loginPassword = null;
 		this.loginUsername = null;
+		this.moneyOnHand = 1000.00;
 	}
 	
 	/**
@@ -47,5 +49,17 @@ public class Person {
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = loginPassword;
 	}	
+	
+	public void addMoneyOnHand(double amount) {
+		this.moneyOnHand += amount;
+	}
+	
+	public double depositFromMoneyOnHand(double amount) {
+		if(amount <= this.moneyOnHand) {
+			this.moneyOnHand -= amount;
+			return amount;
+		}
+		return 0;
+	}
 	
 }

@@ -20,6 +20,7 @@ public abstract class Account {
 		this.belongsTo.setLoginPassword(password);
 		this.savingsAcct = new Savings();
 		this.checkingAcct = new Checking();
+		this.savingsAcct.addDeposit(this.belongsTo.depositFromMoneyOnHand(25.00));
 	}
 	/**
 	 * @return the belongsTo

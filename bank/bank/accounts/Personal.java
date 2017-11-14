@@ -8,6 +8,7 @@ public class Personal extends Account{
 	public Personal(Person belongsTo, String username, String password) {
 		super(belongsTo, username, password);
 		this.setMaxTransferAmount(500.00);
+		this.creditcard = new CreditCard();
 	}
 
 	/**
@@ -54,7 +55,7 @@ public class Personal extends Account{
 
 	@Override
 	public void payCreditBill(double amount) {
-		getCreditcard().payCard(amount);
+		this.getCreditcard().payCard(amount);
 	}
 	
 	

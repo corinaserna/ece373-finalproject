@@ -4,7 +4,7 @@ public class Administrator extends Person{
 	private String title;
 	
 	public Administrator(){
-		
+		this.title = null;
 	}
 
 	/**

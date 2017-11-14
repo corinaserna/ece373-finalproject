@@ -19,6 +19,38 @@ public class Bank {
 		this.totalMoney = 0.0;		
 	}
 	
+	public boolean addCustomer(Person p1) {
+		if(!this.customers.contains(p1)) {
+			this.customers.add(p1);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addAdmin(Person p1) {
+		if(!this.administrators.contains(p1)) {
+			this.administrators.add(p1);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addPersonalAccount(Account a1) {
+		if(!this.personalAccounts.contains(a1)) {
+			this.personalAccounts.add(a1);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean addBusinessAccount(Account a1) {
+		if(!this.businessAccounts.contains(a1)) {
+			this.businessAccounts.add(a1);
+			return true;
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * @return the customers
