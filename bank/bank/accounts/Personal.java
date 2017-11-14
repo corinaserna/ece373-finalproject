@@ -2,7 +2,7 @@ package bank.accounts;
 
 import bank.people.Person;
 
-public abstract class Personal extends Account{
+public class Personal extends Account{
 	private CreditCard creditcard;
 	
 	public Personal(Person belongsTo, String username, String password) {
@@ -43,8 +43,7 @@ public abstract class Personal extends Account{
 
 	@Override
 	public void depositCheckings(double amount) {
-		super.getCheckingAcct().addDeposit(amount);
-		
+		this.setTotalAmount(this.getTotalAmount() + amount);
 	}
 
 	@Override

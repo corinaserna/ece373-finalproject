@@ -8,11 +8,7 @@ public class CreditCard {
 	private double creditBill;
 	
 	public CreditCard(){
-<<<<<<< HEAD
-		this.cardNumber = 0;
-		this.creditLimit = 0;
-		this.creditBill = 0;
-=======
+
 		this.creditBill = 0.0;
 		this.creditLimit = 500.00;
 		StringBuilder builder = new StringBuilder();
@@ -24,7 +20,6 @@ public class CreditCard {
 		}
 		
 		this.cardNumber = builder.toString();
->>>>>>> branch 'master' of https://github.com/corinaserna/ece373-finalproject.git
 	}
 	
 	/**

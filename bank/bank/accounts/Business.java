@@ -2,7 +2,7 @@ package bank.accounts;
 
 import bank.people.Person;
 
-public abstract class Business extends Account{
+public class Business extends Account{
 	
 
 	public Business(Person belongsTo, String loginUsername, String loginPassword) {
@@ -13,7 +13,7 @@ public abstract class Business extends Account{
 
 	@Override
 	public void depositSavings(double amount) {
-		super.getSavingsAcct().addDeposit(amount);
+		this.setTotalAmount(this.getTotalAmount() + amount);
 	}
 
 	@Override

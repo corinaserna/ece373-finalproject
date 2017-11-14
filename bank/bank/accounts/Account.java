@@ -120,5 +120,4 @@ public abstract class Account {
 	public abstract void depositCheckings(double amount);
 	public abstract double withdrawCheckings(double amount);
 	public abstract void payCreditBill(double amount);
-	public abstract void addDeposit(double amount);
 }
