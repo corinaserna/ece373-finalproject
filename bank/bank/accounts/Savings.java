@@ -42,6 +42,7 @@ public class Savings {
 	public double getAmount() {
 		return amount;
 	}
+	//test
 	/**
 	 * @param amount the amount to set
 	 */
