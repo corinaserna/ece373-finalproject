@@ -10,6 +10,7 @@ class BankTest1 {
 
 	@Test
 	void test() {
+		//need to fix test JUnit test
 		Bank bank = new Bank();
 		
 		Administrator ad1 = new Administrator();

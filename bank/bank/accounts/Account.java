@@ -116,10 +116,10 @@ public abstract class Account {
 	public void setCheckingAcct(Checking checkingAcct) {
 		this.checkingAcct = checkingAcct;
 	}
+	//test here
 	public abstract void depositSavings(double amount);
 	public abstract double withdrawSavings(double amount);
 	public abstract void depositCheckings(double amount);
 	public abstract double withdrawCheckings(double amount);
 	public abstract void payCreditBill(double amount);
-	//This is a test 
 }
