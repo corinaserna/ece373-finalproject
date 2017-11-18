@@ -19,6 +19,12 @@ public class Bank {
 		this.totalMoney = 0.0;		
 	}
 	
+	// Should there be remove methods for customer,
+	// admin, personal and business accounts? (for in
+	// the event that a customer might decide to leave 
+	// the bank)
+	
+	
 	public boolean addCustomer(Person p1) {
 		if(!this.customers.contains(p1)) {
 			this.customers.add(p1);
