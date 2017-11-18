@@ -57,6 +57,10 @@ public class Checking {
 	public void addDeposit(double a) {
 		this.amount = amount + a;
 	}
+	
+	public void withdraw(double b) {
+		// Should check for minimum amount 25$
+	}
 	/**
 	 * @param Taking amount out from account
 	 */
