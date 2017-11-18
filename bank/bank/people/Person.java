@@ -62,4 +62,8 @@ public class Person {
 		return 0;
 	}
 	
+	public double getMoneyOnHand() {
+		return moneyOnHand;
+	}
+	
 }
