@@ -19,6 +19,9 @@ public class Business extends Account{
 	@Override
 	public double withdrawSavings(double amount) {
 		// TODO Auto-generated method stub
+		if (super.getTransferAmount(amount) == 0) {
+			System.out.println("Account will have less than 25$");
+		}
 		return 0;
 	}
 
@@ -42,6 +45,7 @@ public class Business extends Account{
 		//Does moeny get subtracted from total, or other accounts?
 		//
 		//
+		
 		
 	}
 }
