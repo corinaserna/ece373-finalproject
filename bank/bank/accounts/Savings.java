@@ -56,4 +56,9 @@ public class Savings {
 		this.amount = this.amount + a;
 	}
 	//this is a test
+	
+	public void withdraw(double a) {
+		// Should check for minimum amount 25$
+		// May not withdraw if withdraw amount causes account amount of less than 25$
+	}
 }
