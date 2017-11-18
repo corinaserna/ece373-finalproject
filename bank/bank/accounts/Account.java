@@ -59,6 +59,7 @@ public abstract class Account {
 		}
 		else {
 			//not enough money;
+			System.out.println("Not enough money.");
 			return 0;
 		}
 	}

@@ -50,7 +50,15 @@ public class Personal extends Account{
 	@Override
 	public double withdrawCheckings(double amount) {
 		//TODO getting money from checking amount or amount from saving
-		return 0;
+		if (super.getTotalAmount() - amount >= 25) {
+			super.getTransferAmount(amount);
+			return amount;
+		}
+		else {
+			System.out.println("Account will have less than 25$ after withdrawal. ");
+			return 0;	
+		}
+		
 	}
 
 	@Override
