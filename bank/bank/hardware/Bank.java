@@ -118,5 +118,26 @@ public class Bank {
 	public void setTotalMoney(double totalMoney) {
 		this.totalMoney = totalMoney;
 	}
+
+	public boolean validateUser(String username, String password) {
+		for(int i = 0; i < customers.size(); i++) {
+			if(customers.get(i).getLoginUsername().equals(username)){
+				if(customers.get(i).getLoginPassword().equals(password)) {
+					return true;
+				}
+			}
+		}
+		
+		for(int i = 0; i < administrators.size(); i++) {
+			if(administrators.get(i).getLoginUsername().equals(username)){
+				if(administrators.get(i).getLoginPassword().equals(password)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+		
+	}
 	
 }

@@ -60,7 +60,9 @@ class BankTest1 {
 		assertTrue(bank.addCustomer(p2));
 		assertTrue(bank.addAdmin(ad1));
 		assertTrue(bank.addPersonalAccount(a1));
-		assertTrue(bank.addBusinessAccount(a2));		
+		assertTrue(bank.addBusinessAccount(a2));
+		
+		BankGUI newGUI = new BankGUI("BankGUI", bank);
 		
 	}
 
