@@ -2,6 +2,8 @@ package bank.hardware;
 import java.util.ArrayList;
 
 import bank.accounts.Account;
+import bank.accounts.Business;
+import bank.accounts.Personal;
 import bank.people.Person;
 
 public class Bank {
@@ -119,11 +121,11 @@ public class Bank {
 		this.totalMoney = totalMoney;
 	}
 
-	public boolean validateUser(String username, String password) {
+	public Person validateUser(String username, String password) {
 		for(int i = 0; i < customers.size(); i++) {
 			if(customers.get(i).getLoginUsername().equals(username)){
 				if(customers.get(i).getLoginPassword().equals(password)) {
-					return true;
+					return customers.get(i);
 				}
 			}
 		}
@@ -131,12 +133,37 @@ public class Bank {
 		for(int i = 0; i < administrators.size(); i++) {
 			if(administrators.get(i).getLoginUsername().equals(username)){
 				if(administrators.get(i).getLoginPassword().equals(password)) {
-					return true;
+					return administrators.get(i);
 				}
 			}
 		}
 		
-		return false;
+		return null;		
+	}
+
+	public void createPersonalAccount(String name, String username, String password) {
+		Person tempP = new Person();
+		tempP.setName(name);
+		tempP.setLoginUsername(username);
+		tempP.setLoginPassword(password);
+		
+		Personal tempAcct = new Personal(tempP, username, password);
+		
+		this.customers.add(tempP);
+		this.personalAccounts.add(tempAcct);
+		
+	}
+
+	public void createBusinessAccount(String name, String username, String password) {
+		Person tempP = new Person();
+		tempP.setName(name);
+		tempP.setLoginUsername(username);
+		tempP.setLoginPassword(password);
+		
+		Business tempAcct = new Business(tempP, username, password);
+		
+		this.customers.add(tempP);
+		this.businessAccounts.add(tempAcct);
 		
 	}
 	

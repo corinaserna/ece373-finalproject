@@ -1,15 +1,17 @@
 package bank.accounts;
 
+import bank.people.Person;
+
 public class Savings {
 	private int accountID;
 	private double requiredMinAmount;
 	private double amount;
 	
 	public Savings(){
-		accountID = 0;
+		this.accountID = 0;
 		//Require at least 25$ to keep the account open
-		requiredMinAmount = 0;
-		amount = 0;
+		this.requiredMinAmount = 25.00;
+		this.amount = 0;
 	}
 	
 	/**
@@ -55,7 +57,6 @@ public class Savings {
 	public void addDeposit(double a) {
 		this.amount = this.amount + a;
 	}
-	//this is a test
 	
 	public void withdraw(double a) {
 		// Should check for minimum amount 25$
