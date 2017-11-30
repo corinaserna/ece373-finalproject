@@ -1,6 +1,8 @@
 package bank.hardware;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -8,9 +10,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -18,8 +22,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
+import com.sun.xml.internal.ws.api.Component;
+
+import bank.accounts.Account;
 import bank.people.Person;
 
 public class BankGUI extends JFrame{
@@ -48,12 +59,17 @@ public class BankGUI extends JFrame{
 	private JRadioButton businessAccountButton;
 	private JRadioButton personalAccountButton;
 	private JButton regRegisterButton;
+	private JButton regReturnButton;
+	
+	private JButton logoutButton;
 	
 	public BankGUI(String windowName, Bank b1){
 		super(windowName);
 		
 		this.bank = b1;
 		
+		this.logoutButton = new JButton("Logout");
+		this.logoutButton.addActionListener(new Listener());
 		setSize(500, 500);
 		
 		//setLayout(new FlowLayout());
@@ -157,6 +173,9 @@ public class BankGUI extends JFrame{
 					handleRegisterOptions(4);
 				}
 			}
+			else if(action.equals("Logout") || action.equals("Nevermind")) {
+				handleLogout();
+			}
 		}
 	}
 	
@@ -188,11 +207,85 @@ public class BankGUI extends JFrame{
 		
 		if(result != null) {
 			System.out.println("Login successful");
-			
+			if(bank.typeAccount(result).equals("customer")) {
+				Account account = bank.getAccount(result);
+				handleCustomerLogin(result, account);
+			}
+			else if(bank.typeAccount(result).equals("admin")) {
+				handleAdminLogin(result);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(this, "You are not a user, please register!");
 		}
+	}
+
+	public void handleAdminLogin(Person result) {
+		System.out.println("admin login");
+		clearGUI();
+		
+		JLabel adminLabel = new JLabel("Bank Administrator - " + result.getName());
+		adminLabel.setBounds(50, 10, 200, 25);
+		panel.add(adminLabel);
+		
+		logoutButton.setBounds(300, 10, 100, 25);
+		panel.add(logoutButton);
+		
+		
+		JLabel bankInformation = new JLabel("Bank Total Balance ...................... $" + bank.getTotalMoney());
+		bankInformation.setBounds(10, 50, 500, 25);
+		bankInformation.setForeground(Color.blue);
+		panel.add(bankInformation);
+		
+		String[] columnNames = { "Customer Name", "Checking", "Savings", "Credit Card Bill" };
+		
+		int totalAcctNum = bank.getPersonalAccounts().size() + bank.getBusinessAccounts().size();
+		ArrayList<Account> allBankAccounts = bank.getAllAccounts();
+		
+		Object[][] data = new Object[totalAcctNum][4];
+		
+		for(int i = 0; i < totalAcctNum; i++) {
+			for(int j = 0; j < 4; j++) {
+				data[i][j] = new Object();
+			}
+		}
+		
+		for(int i = 0; i < totalAcctNum; i++) {
+			System.out.println(allBankAccounts.get(i).getBelongsTo().getName());
+			data[i][0] = allBankAccounts.get(i).getBelongsTo().getName();
+			data[i][1] = allBankAccounts.get(i).getCheckingAcct().getAmount();
+			data[i][2] = allBankAccounts.get(i).getSavingsAcct().getAmount();
+			data[i][3] = allBankAccounts.get(i).getCreditCard().getCreditBill();			
+		}		
+		
+		JTable table = new JTable(data, columnNames);
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		scrollPane.setBounds(10, 100, 400, (int) (table.getRowHeight() * (totalAcctNum + 1.45)));		
+		panel.add(scrollPane);
+		
+		panel.repaint();
+		this.add(panel);
+		getContentPane().repaint();
+		return;
+	}
+
+	public void handleCustomerLogin(Person person, Account account) {
+		clearGUI();
+		
+		JLabel customerLabel = new JLabel(person.getName());
+		customerLabel.setBounds(50, 10, 200, 25);
+		panel.add(customerLabel);
+		
+		logoutButton.setBounds(300, 10, 100, 25);
+		panel.add(logoutButton);
+		
+		
+		
+		panel.repaint();
+		this.add(panel);
+		getContentPane().repaint();
+		return;
 	}
 
 	public void handleRegister() {
@@ -238,9 +331,19 @@ public class BankGUI extends JFrame{
 		regRegisterButton.addActionListener(new Listener());
 		panel.add(regRegisterButton);
 		
+		regReturnButton = new JButton("Nevermind");
+		regReturnButton.setBounds(150, 170, 120, 25);
+		regReturnButton.addActionListener(new Listener());
+		panel.add(regReturnButton);
+		
 		this.add(panel);
 		getContentPane().repaint();
 		return;
+	}
+	
+	public void handleLogout(){
+		clearGUI();
+		buildGUI();
 	}
 }
 

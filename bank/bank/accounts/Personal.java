@@ -3,26 +3,10 @@ package bank.accounts;
 import bank.people.Person;
 
 public class Personal extends Account{
-	private CreditCard creditcard;
 	
 	public Personal(Person belongsTo, String username, String password) {
 		super(belongsTo, username, password);
 		this.setMaxTransferAmount(500.00);
-		this.creditcard = new CreditCard();
-	}
-
-	/**
-	 * @return the creditcard
-	 */
-	public CreditCard getCreditcard() {
-		return creditcard;
-	}
-
-	/**
-	 * @param creditcard the creditcard to set
-	 */
-	public void setCreditcard(CreditCard creditcard) {
-		this.creditcard = creditcard;
 	}
 
 	@Override
@@ -63,7 +47,7 @@ public class Personal extends Account{
 
 	@Override
 	public void payCreditBill(double amount) {
-		this.getCreditcard().payCard(amount);
+		//this.getCreditcard().payCard(amount);
 	}
 	
 	

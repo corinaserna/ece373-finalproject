@@ -44,7 +44,7 @@ class BankTest1 {
 		assertEquals("jsmith", a1.getLoginUsername());
 		assertEquals("hello123", a1.getLoginPassword());
 		assertEquals(500.00, a1.getMaxTransferAmount());
-		assertNotNull(a1.getCreditcard().getCardNumber());
+		assertNotNull(a1.getCreditCard().getCardNumber());
 		assertEquals(25.00, a1.getSavingsAcct().getAmount());
 		
 		Business a2 = new Business(p2, u2, pw2);

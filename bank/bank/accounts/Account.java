@@ -9,6 +9,7 @@ public abstract class Account {
 	private String loginPassword;
 	private Savings savingsAcct;
 	private Checking checkingAcct;
+	private CreditCard creditcard;
 	
 	
 	
@@ -20,6 +21,7 @@ public abstract class Account {
 		this.belongsTo.setLoginPassword(password);
 		this.savingsAcct = new Savings();
 		this.checkingAcct = new Checking();
+		this.creditcard = new CreditCard();
 		this.savingsAcct.addDeposit(this.belongsTo.depositFromMoneyOnHand(25.00));
 	}
 	/**
@@ -116,6 +118,20 @@ public abstract class Account {
 	 */
 	public void setCheckingAcct(Checking checkingAcct) {
 		this.checkingAcct = checkingAcct;
+	}
+	
+	/**
+	 * @return the creditcard
+	 */
+	public CreditCard getCreditCard() {
+		return creditcard;
+	}
+
+	/**
+	 * @param creditcard the creditcard to set
+	 */
+	public void setCreditCard(CreditCard creditcard) {
+		this.creditcard = creditcard;
 	}
 	//test here
 	public abstract void depositSavings(double amount);

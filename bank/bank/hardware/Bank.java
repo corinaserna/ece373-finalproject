@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import bank.accounts.Account;
 import bank.accounts.Business;
 import bank.accounts.Personal;
+import bank.people.Customer;
 import bank.people.Person;
 
 public class Bank {
@@ -140,31 +141,59 @@ public class Bank {
 		
 		return null;		
 	}
+	
+	public Account getAccount(Person p) {
+		for(int i = 0; i < this.personalAccounts.size(); i++) {
+			if(personalAccounts.get(i).getBelongsTo().equals(p)) {
+				return personalAccounts.get(i);
+			}
+		}
+		for(int i = 0; i < this.businessAccounts.size(); i++) {
+			if(businessAccounts.get(i).getBelongsTo().equals(p)) {
+				return businessAccounts.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public String typeAccount(Person p) {
+		if(this.customers.contains(p)) {
+			return "customer";
+		}
+		else {
+			return "admin";
+		}
+	}
 
 	public void createPersonalAccount(String name, String username, String password) {
-		Person tempP = new Person();
+		Customer tempP = new Customer();
 		tempP.setName(name);
 		tempP.setLoginUsername(username);
 		tempP.setLoginPassword(password);
 		
 		Personal tempAcct = new Personal(tempP, username, password);
 		
-		this.customers.add(tempP);
-		this.personalAccounts.add(tempAcct);
-		
+		this.addCustomer(tempP);
+		this.addPersonalAccount(tempAcct);		
 	}
 
 	public void createBusinessAccount(String name, String username, String password) {
-		Person tempP = new Person();
+		Customer tempP = new Customer();
 		tempP.setName(name);
 		tempP.setLoginUsername(username);
 		tempP.setLoginPassword(password);
 		
 		Business tempAcct = new Business(tempP, username, password);
 		
-		this.customers.add(tempP);
-		this.businessAccounts.add(tempAcct);
-		
+		this.addCustomer(tempP);
+		this.addBusinessAccount(tempAcct);
+	}
+
+	public ArrayList<Account> getAllAccounts() {
+		ArrayList<Account> allAccts = new ArrayList<Account>();
+		allAccts.addAll(businessAccounts);
+		allAccts.addAll(personalAccounts);
+		return allAccts;
 	}
 	
 }
