@@ -53,6 +53,12 @@ public class CreditCard {
 		return creditBill;
 	}
 	/**
+	 * @return the creditBill
+	 */
+	public double getAvailableCredit() {
+		return this.creditLimit - creditBill;
+	}
+	/**
 	 * @param creditBill the creditBill to set
 	 */
 	public void setCreditBill(double creditBill) {
@@ -63,10 +69,5 @@ public class CreditCard {
 	 */
 	public void payCard(double amount) {
 		this.creditBill = this.creditBill - amount;
-	}
-	
-	
-	
-		
-	
+	}	
 }

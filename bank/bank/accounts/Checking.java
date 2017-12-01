@@ -1,7 +1,5 @@
 package bank.accounts;
 
-import bank.people.Person;
-
 public class Checking {
 	private int accountID;
 	private double requiredMinAmount;
@@ -58,8 +56,12 @@ public class Checking {
 		this.amount = amount + a;
 	}
 	
-	public void withdraw(double b) {
-		// Should check for minimum amount 25$
+	public boolean withdraw(double b) {
+		if(this.getAmount() >= b) {
+			this.amount -= b;
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * @param Taking amount out from account

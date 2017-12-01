@@ -1,7 +1,5 @@
 package bank.hardware;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import bank.accounts.Business;
 import bank.accounts.Personal;
 import bank.people.Administrator;
@@ -37,6 +35,7 @@ public class Driver1 {
 		bank.addPersonalAccount(a1);
 		bank.addBusinessAccount(a2);
 		
+		@SuppressWarnings("unused")
 		BankGUI newGUI = new BankGUI("BankGUI", bank);
 	}
 }

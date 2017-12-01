@@ -113,6 +113,14 @@ public class Bank {
 	 * @return the totalMoney
 	 */
 	public double getTotalMoney() {
+		for(int i = 0; i < this.getBusinessAccounts().size(); i++){
+			this.totalMoney += this.getBusinessAccounts().get(i).getTotalAmount();
+			this.totalMoney += this.getBusinessAccounts().get(i).getCreditCard().getCreditBill();
+		}
+		for(int i = 0; i < this.getPersonalAccounts().size(); i++){
+			this.totalMoney += this.getPersonalAccounts().get(i).getTotalAmount();
+			this.totalMoney += this.getPersonalAccounts().get(i).getCreditCard().getCreditBill();
+		}
 		return totalMoney;
 	}
 	/**

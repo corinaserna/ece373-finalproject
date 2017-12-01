@@ -9,9 +9,7 @@ public abstract class Account {
 	private String loginPassword;
 	private Savings savingsAcct;
 	private Checking checkingAcct;
-	private CreditCard creditcard;
-	
-	
+	private CreditCard creditCard;	
 	
 	public Account(Person belongsTo, String username, String password) {
 		this.belongsTo = belongsTo;
@@ -21,7 +19,7 @@ public abstract class Account {
 		this.belongsTo.setLoginPassword(password);
 		this.savingsAcct = new Savings();
 		this.checkingAcct = new Checking();
-		this.creditcard = new CreditCard();
+		this.creditCard = new CreditCard();
 		this.savingsAcct.addDeposit(this.belongsTo.depositFromMoneyOnHand(25.00));
 	}
 	/**
@@ -40,6 +38,7 @@ public abstract class Account {
 	 * @return the totalAmount
 	 */
 	public double getTotalAmount() {
+		this.totalAmount = this.getSavingsAcct().getTotalAmount() + this.getCheckingAcct().getAmount();
 		return totalAmount;
 	}
 	/**
@@ -124,19 +123,96 @@ public abstract class Account {
 	 * @return the creditcard
 	 */
 	public CreditCard getCreditCard() {
-		return creditcard;
+		return creditCard;
 	}
 
 	/**
 	 * @param creditcard the creditcard to set
 	 */
 	public void setCreditCard(CreditCard creditcard) {
-		this.creditcard = creditcard;
+		this.creditCard = creditcard;
 	}
-	//test here
-	public abstract void depositSavings(double amount);
-	public abstract double withdrawSavings(double amount);
-	public abstract void depositCheckings(double amount);
-	public abstract double withdrawCheckings(double amount);
-	public abstract void payCreditBill(double amount);
+	
+	public boolean depositSavings(double amount) {
+		if(this.getBelongsTo().getMoneyOnHand() < amount) {
+			return false;
+		}
+		this.setTotalAmount(this.getTotalAmount() + amount);
+		this.getSavingsAcct().addDeposit(amount);
+		this.getBelongsTo().depositFromMoneyOnHand(amount);
+		return true;
+	}
+
+	public boolean withdrawSavings(double amount) {
+		if(this.getSavingsAcct().getAvailableAmount() < amount) {
+			return false;
+		}
+		this.getSavingsAcct().withdraw(amount);
+		this.belongsTo.addMoneyOnHand(amount);
+		return true;
+	}	
+
+	public boolean depositCheckings(double amount) {
+		if(this.getBelongsTo().getMoneyOnHand() < amount) {
+			return false;
+		}
+		this.setTotalAmount(this.getTotalAmount() + amount);
+		this.getCheckingAcct().addDeposit(amount);
+		this.getBelongsTo().depositFromMoneyOnHand(amount);
+		return true;		
+	}
+
+	public boolean withdrawCheckings(double amount) {
+		if(this.getCheckingAcct().getAmount() < amount) {
+			return false;
+		}
+		this.getCheckingAcct().withdraw(amount);
+		this.belongsTo.addMoneyOnHand(amount);
+		return true;
+	}	
+	
+	public boolean transferFromChecking(double amount) {
+		if(this.getCheckingAcct().getAmount() >= amount) {
+			this.getCheckingAcct().withdraw(amount);
+			this.getSavingsAcct().addDeposit(amount);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean transferFromSavings(double amount) {
+		if(this.getSavingsAcct().getAvailableAmount() >= amount) {
+			this.getSavingsAcct().withdraw(amount);
+			this.getCheckingAcct().addDeposit(amount);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean payCreditFromSavings(double amount) {
+		if(this.getSavingsAcct().getAvailableAmount() >= amount) {
+			this.getSavingsAcct().withdraw(amount);
+			this.getCreditCard().payCard(amount);
+			return true;
+		}
+		return false;
+		
+	}
+	public boolean payCreditFromChecking(double amount) {
+		if(this.getCheckingAcct().getAmount() >= amount) {
+			this.getCheckingAcct().withdraw(amount);
+			this.getCreditCard().payCard(amount);
+			return true;
+		}
+		return false;
+	}
+	public boolean payCreditFromMoney(double amount) {
+		if(this.getBelongsTo().getMoneyOnHand() >= amount) {
+			this.getBelongsTo().depositFromMoneyOnHand(amount);
+			this.getCreditCard().payCard(amount);
+			return true;
+		}
+		return false;
+		
+	}
 }

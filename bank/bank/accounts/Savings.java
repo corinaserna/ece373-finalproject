@@ -1,7 +1,5 @@
 package bank.accounts;
 
-import bank.people.Person;
-
 public class Savings {
 	private int accountID;
 	private double requiredMinAmount;
@@ -41,10 +39,15 @@ public class Savings {
 	/**
 	 * @return the amount
 	 */
-	public double getAmount() {
+	public double getAvailableAmount() {
+		return amount - 25.00;
+	}
+	/**
+	 * @return the amount
+	 */
+	public double getTotalAmount() {
 		return amount;
 	}
-	//test
 	/**
 	 * @param amount the amount to set
 	 */
@@ -58,8 +61,11 @@ public class Savings {
 		this.amount = this.amount + a;
 	}
 	
-	public void withdraw(double a) {
-		// Should check for minimum amount 25$
-		// May not withdraw if withdraw amount causes account amount of less than 25$
+	public boolean withdraw(double a) {
+		if(this.getAvailableAmount() >= a) {
+			this.amount -= a;
+			return true;
+		}
+		return false;
 	}
 }
