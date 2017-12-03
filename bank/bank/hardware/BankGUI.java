@@ -149,17 +149,26 @@ public class BankGUI extends JFrame{
 				}
 				else if(personalAccountButton.isSelected()) {
 					System.out.println("Create personal account");
-					bank.createPersonalAccount(name, username, password);
-					handleRegisterOptions(5);
-					clearGUI();
-					buildGUI();
+					if(bank.createPersonalAccount(name, username, password) == true){
+						handleRegisterOptions(5);
+						clearGUI();
+						buildGUI();
+					}
+					else{
+						handleRegisterOptions(6);
+					}
 				}
 				else if(businessAccountButton.isSelected()) {
 					System.out.println("Create business account");
-					bank.createBusinessAccount(name, username, password);
-					handleRegisterOptions(5);
-					clearGUI();
-					buildGUI();
+					if(bank.createBusinessAccount(name, username, password) == true){
+						handleRegisterOptions(5);
+						clearGUI();
+						buildGUI();
+					}
+					else{
+						handleRegisterOptions(6);
+					}
+
 				}
 				else {
 					handleRegisterOptions(4);
@@ -199,6 +208,9 @@ public class BankGUI extends JFrame{
 				break;
 			case 5:				
 				JOptionPane.showMessageDialog(this, "Registered! Please Login.");
+				break;
+			case 6:
+				JOptionPane.showMessageDialog(this, "Account name has already been taken! Please try again!!");
 				break;
 		}		
 	}

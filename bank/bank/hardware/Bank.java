@@ -172,29 +172,54 @@ public class Bank {
 			return "admin";
 		}
 	}
-
-	public void createPersonalAccount(String name, String username, String password) {
+	public boolean checkUsernameAvailable(String username, char bOrp){
+		if(bOrp == 'p' ){
+			for(int i = 0; i < this.getPersonalAccounts().size();i++){
+				if(username.equals(this.getPersonalAccounts().get(i).getLoginUsername()) == true){
+					return false;
+				}
+			}
+		}
+		else if (bOrp == 'b'){
+			for(int i = 0; i < this.getBusinessAccounts().size();i++){
+				if(username.equals(this.getBusinessAccounts().get(i).getLoginUsername()) == true){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	public boolean createPersonalAccount(String name, String username, String password) {
 		Customer tempP = new Customer();
-		tempP.setName(name);
-		tempP.setLoginUsername(username);
-		tempP.setLoginPassword(password);
-		
-		Personal tempAcct = new Personal(tempP, username, password);
-		
-		this.addCustomer(tempP);
-		this.addPersonalAccount(tempAcct);		
+		if(checkUsernameAvailable(username, 'p') == true){
+			tempP.setName(name);
+			tempP.setLoginUsername(username);
+			tempP.setLoginPassword(password);
+			
+			Personal tempAcct = new Personal(tempP, username, password);
+			
+			this.addCustomer(tempP);
+			this.addPersonalAccount(tempAcct);	
+			return true;
+		}
+		return false;
 	}
 
-	public void createBusinessAccount(String name, String username, String password) {
+	public boolean createBusinessAccount(String name, String username, String password) {
 		Customer tempP = new Customer();
-		tempP.setName(name);
-		tempP.setLoginUsername(username);
-		tempP.setLoginPassword(password);
-		
-		Business tempAcct = new Business(tempP, username, password);
-		
-		this.addCustomer(tempP);
-		this.addBusinessAccount(tempAcct);
+		if(checkUsernameAvailable(username, 'b') == true){
+
+			tempP.setName(name);
+			tempP.setLoginUsername(username);
+			tempP.setLoginPassword(password);
+			
+			Business tempAcct = new Business(tempP, username, password);
+			
+			this.addCustomer(tempP);
+			this.addBusinessAccount(tempAcct);
+			return true;
+		}
+		return false;
 	}
 
 	public ArrayList<Account> getAllAccounts() {
