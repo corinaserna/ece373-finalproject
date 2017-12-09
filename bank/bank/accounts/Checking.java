@@ -8,7 +8,6 @@ public class Checking {
 	
 	public Checking(){
 		this.accountID = 0;
-		//minimum amount is 25$
 		this.requiredMinAmount = 0;
 		this.amount = 0;
 	}

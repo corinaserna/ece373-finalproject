@@ -33,8 +33,8 @@ public class BankGUI extends JFrame{
 	// Login fields
 	private JButton loginButton;
 	private JButton registerButton;
-	private JButton forgotUserButton;
-	private JButton forgotPassButton;	
+	//private JButton forgotUserButton;
+	//private JButton forgotPassButton;	
 	private JLabel usernameLabel;
 	private JLabel passwordLabel;
 	private JTextField usernameEntry;
